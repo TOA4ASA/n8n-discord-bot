@@ -1,4 +1,0 @@
-const currentDate = new Date();
-const date = currentDate.toISOString().split("T")[0];
-
-return { date};

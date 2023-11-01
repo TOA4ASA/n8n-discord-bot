@@ -1,0 +1,372 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "e3e5ba88-86cd-49e4-a878-97d7b78be452",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        740,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "content": "checks the agenda",
+        "height": 136.87209302325576,
+        "width": 159.5232558139535
+      },
+      "id": "8de9dc91-f1a5-4c18-bdaf-9ef7c4bb4eca",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1390.4767441860463,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "currentDate, date",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "id": "5f0e0f84-2de3-4e53-84ca-7612253f908e",
+      "name": "Item Lists",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 3,
+      "position": [
+        2100,
+        380
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "date, currentDate",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "id": "dfe4d9d3-acc0-43e0-ae22-ed472f8819c6",
+      "name": "Item Lists1",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 3,
+      "position": [
+        1780,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "content": "checks date and makes it useble",
+        "height": 154.55813953488374,
+        "width": 150
+      },
+      "id": "85e7c9a5-3e63-442d-b630-21b4a570c092",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "content": "splits date and time of the calandar event",
+        "height": 194.01162790697654,
+        "width": 161.09302325581388
+      },
+      "id": "4b65be47-25ad-4b72-a53e-4c62f9071309",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1580,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "content": "checks if there is an event",
+        "height": 183.12790697674413,
+        "width": 150
+      },
+      "id": "1edda34b-29d1-4265-b120-18df5262c6f6",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2240,
+        296.87209302325573
+      ]
+    },
+    {
+      "parameters": {
+        "webhookUri": "https://discord.com/api/webhooks/1166465336841875570/WpqFpJUp3QaQYIfAhJV1Fdsq2LelgUyQMzzS4svgZo9ueTBX9WMeeR1Jh3EAzwfatPRu",
+        "text": "={{ $json.date }} today these activity's are planned on the callender",
+        "options": {}
+      },
+      "id": "5341a251-38c0-42cf-9c27-92234def2ed3",
+      "name": "discord first msg",
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "webhookUri": "https://discord.com/api/webhooks/1166465336841875570/WpqFpJUp3QaQYIfAhJV1Fdsq2LelgUyQMzzS4svgZo9ueTBX9WMeeR1Jh3EAzwfatPRu",
+        "text": "no activity's planned for today",
+        "options": {}
+      },
+      "id": "723ec37d-1d49-4452-9a2d-d54f80f2047b",
+      "name": "discord msg when no events",
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 1,
+      "position": [
+        2460,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "webhookUri": "https://discord.com/api/webhooks/1166465336841875570/WpqFpJUp3QaQYIfAhJV1Fdsq2LelgUyQMzzS4svgZo9ueTBX9WMeeR1Jh3EAzwfatPRu",
+        "text": "={{ $json.htmlLink }}\n\"{{ $json.summary }}\" at {{ $json.time }}",
+        "options": {}
+      },
+      "id": "e428e9a0-078d-41e7-a628-b28e3a143004",
+      "name": "discord msg when event",
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 1,
+      "position": [
+        2460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "4a03633e-e0ff-42c5-a5ee-e61df8cade9a",
+      "name": "checks if events",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        2260,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "content": "checks if date is the same as current date",
+        "height": 200.8139534883722,
+        "width": 157.0116279069766
+      },
+      "id": "59a61eda-184f-4ba5-9179-8e6a1272e14d",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        279.18604651162775
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst filteredItems = items.filter(\n  (item) => item?.json?.date === item?.json?.currentDate,\n);\nreturn filteredItems;\n"
+      },
+      "id": "b9c70a23-e40d-4a39-b5bd-1418e3c8c803",
+      "name": "checks date",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1940,
+        380
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n\nconst updatedItems = items.map((item) => {\n  const dateTime = item?.json?.start?.dateTime;\n\n  const date = dateTime?.split(\"T\")[0]; \n  const time = dateTime?.split(\"T\")[1];\n\n  item.json.date = date;\n  item.json.time = time;\n\n  item.json.currentDate = new Date().toISOString().split(\"T\")[0];\n\n  return item;\n});\nreturn updatedItems;\n"
+      },
+      "id": "00fd1a74-6f8f-4590-ad85-394494a94e2b",
+      "name": "date time code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1600,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "a46675fb84ffb8b7f3157833b62f0714b2f1543fd57660791a7df62df7f95db8@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "test app"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "id": "78b45d6a-9229-4a70-9008-707676fb477c",
+      "name": "Google Calendar",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        380
+      ],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "7UO1hiTdQm8m0PCd",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const currentDate = new Date();\nconst date = currentDate.toISOString().split(\"T\")[0];\n\nreturn { date};\n"
+      },
+      "id": "5b33f3d8-24d3-4853-9630-c5afd44cb1c7",
+      "name": "date",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1080,
+        380
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item Lists": {
+      "main": [
+        [
+          {
+            "node": "checks if events",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item Lists1": {
+      "main": [
+        [
+          {
+            "node": "checks date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "discord first msg": {
+      "main": [
+        [
+          {
+            "node": "Google Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "checks if events": {
+      "main": [
+        [
+          {
+            "node": "discord msg when event",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "discord msg when no events",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "checks date": {
+      "main": [
+        [
+          {
+            "node": "Item Lists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "date time code": {
+      "main": [
+        [
+          {
+            "node": "Item Lists1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar": {
+      "main": [
+        [
+          {
+            "node": "date time code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "date": {
+      "main": [
+        [
+          {
+            "node": "discord first msg",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "745b49f9-3c45-4cc0-93fd-c51a7b84d178",
+  "id": "LCvU04dSP7w5RtY3",
+  "meta": {
+    "instanceId": "98d4e34023c477358e203bd43ebfd5d6634b476ffbd837d3a3b2e58196f84d25"
+  },
+  "tags": []
+}
